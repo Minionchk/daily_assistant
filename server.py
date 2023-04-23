@@ -99,14 +99,14 @@ async def weather(update, context):
 
 async def horoscope(update, context):
     translator = Translator(from_lang="English", to_lang="russian")
-    for i in range(0, 13):
+    for i in range(0, 12):
         zodiacs = ['Aries', 'Taurus', 'Gemini',
                    'Cancer', 'Leo', 'Virgo',
                    'Libra', 'Scorpio', 'Sagittarius',
                    'Capricorn', 'Aquarius', 'Pisces']
         url = (
             "https://www.horoscope.com/us/horoscopes/general/"
-            f"horoscope-general-daily-today.aspx?sign={i}"
+            f"horoscope-general-daily-today.aspx?sign={i+1}"
         )
         soup = BeautifulSoup(requests.get(url).content,
                              "html.parser")
