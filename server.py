@@ -17,7 +17,7 @@ app = ApplicationBuilder().token("6036569426:AAEp_CH_gNaJ8WSDmGpDvbCrCUVlc4sNBO4
     proxy_url).build()
 reply_keyboard = [['/joke'],
                   ['/weather', '/horoscope'],
-                  ['/todo_list_check', '/todo_list_add']]
+                  ['/todo_list_check', '/todo_list_add', '/todo_list_check']]
 markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False)
 
 
@@ -34,7 +34,9 @@ async def help_command(update, context):
                                     " \n /weather - отправить погоду на сегодня "
                                     "\n /horoscope - отправить гороскопы на сегодня"
                                     "\n /todo_list_add - создать список дел и добавить"
-                                    " в него элемент",
+                                    " в него элемент"
+                                    "\n /todo_list_check - посмотреть список дел"
+                                    "\n /todo_list_clear - очистить список дел",
                                     reply_markup=markup)
 
 
