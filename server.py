@@ -99,7 +99,7 @@ async def weather(update, context):
 
 async def horoscope(update, context):
     translator = Translator(from_lang="English", to_lang="russian")
-    for i in range(1, 13):
+    for i in range(0, 13):
         zodiacs = ['Aries', 'Taurus', 'Gemini',
                    'Cancer', 'Leo', 'Virgo',
                    'Libra', 'Scorpio', 'Sagittarius',
