@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 proxy_url = "socks5://user:pass@host:port"
 app = ApplicationBuilder().token("6036569426:AAEp_CH_gNaJ8WSDmGpDvbCrCUVlc4sNBO4").proxy_url(
     proxy_url).build()
-reply_keyboard = [['/joke'],
+reply_keyboard = [['/help', '/joke'],
                   ['/weather', '/horoscope'],
                   ['/todo_list_check', '/todo_list_add', '/todo_list_clear']]
 markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=False)
