@@ -27,6 +27,8 @@ async def start(update, context):
         rf"Привет {user.mention_html()}! Я бот-ежедневник, для друзей просто Ди. Можешь написать "
         "мне в любой момент, а я помогу как смогу! С помощью команды /help "
         "ты можешь увидеть что я могу", reply_markup=markup)
+    open(f"log{str(user.mention_html())[23:30]}.txt", encoding="utf-8", mode="w+")
+    open(f"todo_list{str(user.mention_html())[23:30]}.txt", encoding="utf-8", mode="w+")
 
 
 async def help_command(update, context):
@@ -41,7 +43,7 @@ async def help_command(update, context):
 
 
 async def log(update, context):
-    f = open('log.txt', 'r+', encoding='utf-8')
+    f = open(f'log{str(update.effective_user.mention_html())[23:30]}.txt', 'r+', encoding='utf-8')
     f.seek(0, 2)
     print(update.message.text, file=f)
 
@@ -53,21 +55,25 @@ async def jokes(update, context):
 
 
 async def todo_list_add(update, context):
-    f = open("todo_list.txt", mode="w", encoding="utf-8")
+    f = open(f"todo_list{str(update.effective_user.mention_html())[23:30]}.txt", mode="w", encoding="utf-8")
     await update.message.reply_text("Введите дело, которое хотите добавить, "
                                     "а затем команду /todo_list_add2")
 
 
 async def todo_list_add2(update, context):
-    f1 = open("todo_list.txt", mode="r+", encoding="utf-8")
-    task = open('log.txt', mode='r', encoding='utf-8').readlines()[-1]
+    f1 = open(f"todo_list{str(update.effective_user.mention_html())[23:30]}.txt", mode="r+", encoding="utf-8")
+    task = \
+        open(f'log{str(update.effective_user.mention_html())[23:30]}.txt', mode='r',
+             encoding='utf-8').readlines()[
+            -1]
     f1.seek(0, 2)
     print(task, file=f1)
     await update.message.reply_text("Дело добавлено!")
 
 
 async def todo_list_check(update, context):
-    lines = open('todo_list.txt', mode='r', encoding='utf-8').readlines()
+    lines = open(f'todo_list{str(update.effective_user.mention_html())[23:30]}.txt', mode='r',
+                 encoding='utf-8').readlines()
     s = ''
     for line in lines:
         s += line
@@ -78,7 +84,7 @@ async def todo_list_check(update, context):
 
 
 async def todo_list_clear(update, context):
-    f = open('todo_list.txt', mode='w')
+    f = open(f'todo_list{str(update.effective_user.mention_html())[23:30]}.txt', mode='w')
     f.write('')
     await update.message.reply_text("Список дел очищен!")
 
@@ -106,7 +112,7 @@ async def horoscope(update, context):
                    'Capricorn', 'Aquarius', 'Pisces']
         url = (
             "https://www.horoscope.com/us/horoscopes/general/"
-            f"horoscope-general-daily-today.aspx?sign={i+1}"
+            f"horoscope-general-daily-today.aspx?sign={i + 1}"
         )
         soup = BeautifulSoup(requests.get(url).content,
                              "html.parser")
